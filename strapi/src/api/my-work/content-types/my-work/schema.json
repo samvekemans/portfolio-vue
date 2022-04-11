@@ -4,7 +4,8 @@
   "info": {
     "singularName": "my-work",
     "pluralName": "my-works",
-    "displayName": "myWork"
+    "displayName": "myWork",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,10 @@
       "type": "string"
     },
     "banner": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "slug": {
       "type": "uid"
@@ -31,34 +28,22 @@
       "type": "richtext"
     },
     "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "background": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "carousel": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": true
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "information": {
       "type": "richtext"
