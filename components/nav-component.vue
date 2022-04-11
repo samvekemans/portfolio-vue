@@ -49,10 +49,14 @@
           </nuxt-link>
         </li>
         <li class="navElement">
-          <nuxt-link class="text-2xl px-1.5 py-1" to="#"> Over mij </nuxt-link>
+          <nuxt-link class="text-2xl px-1.5 py-1" to="/about-me">
+            Over mij
+          </nuxt-link>
         </li>
         <li class="navElement">
-          <nuxt-link class="text-2xl px-1.5 py-1" to="#"> Contact </nuxt-link>
+          <nuxt-link class="text-2xl px-1.5 py-1" to="/contact">
+            Contact
+          </nuxt-link>
         </li>
       </ul>
     </nav>
