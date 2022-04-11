@@ -8,11 +8,11 @@
     >
       <div class="absolute h-24 bg-gradient-to-b from-white w-full"></div>
       <div class="max-w-6xl m-auto pt-16 pb-16">
-        <div class="p-always flex flex-col gap-10">
+        <div class="p-always flex flex-col gap-9">
           <div
             v-for="item in items"
             :key="item.title"
-            class="flex justify-between items-start work bg-white rounded shadow p-7 700:flex-col 700:gap-3 700:m-auto 700:items-center"
+            class="flex justify-between items-start work bg-white rounded shadow p-7 700:flex-col 700:gap-3 700:m-auto 700:items-center w-full"
           >
             <article class="700:flex 700:flex-col 700:items-center">
               <h3 class="text-5xl font-write 1000:text-4xl">
@@ -31,18 +31,18 @@
             <img
               :src="`http://localhost:1337${item.attributes.image.data.attributes.url}`"
               alt=""
-              class="max-h-44 1000:w-72"
+              class="max-h-44"
             />
             <nuxt-link
               :to="`/my-work/${item.attributes.slug}`"
               class="text-2xl hidden 700:block"
             >
               Bekijk meer →
-            </nuxt-link>
+            </nuxt-link> 
           </div>
         </div>
       </div>
-    </main>
+    </main> 
     <Footer />
   </div>
 </template>
