@@ -7,7 +7,7 @@ export default {
   async mounted() {
     if (!this.$route.params.work) {
       const routeData = await this.$axios.$get(
-        "http://localhost:1337/api/my-works"
+        `${this.$config.cmsUrl}/api/my-works`
       );
       this.$router.push("/my-work/" + routeData.data[0].attributes.slug);
     }

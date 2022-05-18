@@ -2,30 +2,29 @@
   <div class="relative">
     <header class="h-screen flex flex-col justify-between">
       <nav-component />
-      <div class="flex flex-col h-full">
-        <div class="flex justify-center gap-4">
-          <div
-            v-for="navItem in navItems"
-            :key="navItem.slug"
-            class="flex justify-center w-40 bg-gray-100 shadow-md rounded navItem relative"
-          >
-            <nuxt-link
-              :to="`/my-work/${navItem.attributes.slug}`"
-              class="p-4 flex justify-center w-full rounded link aborder"
-            >
-              <img
-                :src="`http://localhost:1337${navItem.attributes.image.data.attributes.url}`"
-                alt=""
-                class="max-h-20"
-              />
-            </nuxt-link>
-          </div>
-        </div>
-        <div class="flex flex-col items-center h-full justify-center">
-          <img :src="banner" alt="" class="max-h-80 pt-2" />
-          <h1 class="text-3xl font-write pt-9 700:hidden">{{ title }}</h1>
-        </div>
+
+      <div class="h-full bg-contain bg-no-repeat bg-center mx-10 mb-20 mt-10" :style="{ 'background-image': `url(${banner})` }">
+        
       </div>
+         <div class="flex flex-row flex-wrap content-around gap-4 justify-center">
+            <div
+              v-for="navItem in navItems"
+              :key="navItem.slug"
+              class="flex justify-center w-40 h-28 bg-gray-100 shadow-md rounded navItem relative 700:w-28 700:h-24"
+            >
+                <nuxt-link
+                  :to="`/my-work/${navItem.attributes.slug}`"
+                  class="p-4 flex justify-center w-full rounded link aborder"
+                >
+                  <img
+                    :src="`${$config.cmsUrl}${navItem.attributes.image.data.attributes.url}`"
+                    alt=""
+                    class="max-h-20 object-contain"
+                  />
+                </nuxt-link>
+              </div>
+      </div>
+
       <div class="p-10 pt-0">
         <div
           v-scroll-to="{ el: '#main', duration: 1000 }"
@@ -57,7 +56,7 @@ export default {
     },
   },
   async fetch() {
-    const data = await this.$axios.$get("http://localhost:1337/api/my-works", {
+    const data = await this.$axios.$get(`${this.$config.cmsUrl}/api/my-works`, {
       params: {
         populate: ["image"],
       },
@@ -98,23 +97,20 @@ export default {
   }
 }
 
-/* .navItem .nuxt-link-active{
+.navItem .nuxt-link-active{
     background-color: #D97386;
     width: 100%;
-} */
-
-.aborder:hover::before {
-  position: absolute;
-  content: "";
-  inset: 0px;
-  right: 0px;
-  border: 5px solid #d97386;
-  border-radius: 0.25em;
 }
+.navItem .aborder:hover{
+    background-color: #D97386;
+    width: 100%;
+}
+
+
 
 .aborder:hover::after {
   content: "";
-  top: 100%;
+  bottom: 100%;
   left: 0px;
   right: 0px;
   margin: auto;
@@ -123,22 +119,15 @@ export default {
   position: absolute;
   border-style: solid;
   border-image: initial;
-  border-color: #d97386 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+  border-color:rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #d97386 ;
   border-width: 10px;
 }
 
-.link.nuxt-link-active::before {
-  position: absolute;
-  content: "";
-  inset: 0px;
-  right: 0px;
-  border: 5px solid #d97386;
-  border-radius: 0.25em;
-}
+
 
 .link.nuxt-link-active::after {
   content: "";
-  top: 100%;
+  bottom: 100%;
   left: 0px;
   right: 0px;
   margin: auto;
@@ -147,7 +136,7 @@ export default {
   position: absolute;
   border-style: solid;
   border-image: initial;
-  border-color: #d97386 rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+  border-color:rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #d97386 ;
   border-width: 10px;
 }
 

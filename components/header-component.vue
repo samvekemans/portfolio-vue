@@ -50,7 +50,7 @@ export default {
     window.addEventListener("scroll", this.onScroll);
     window.addEventListener("resize", this.resize);
     this.imgOffsetTop =
-      this.$refs.img.offsetTop + this.$refs.img.clientHeight / 2;
+      this.$refs.img?.offsetTop + this.$refs.img?.clientHeight / 2;
   },
 
   methods: {
@@ -65,7 +65,7 @@ export default {
     },
     resize() {
       this.imgOffsetTop =
-        this.$refs.img?.offsetTop + this.$refs.img.clientHeight / 2;
+        this.$refs.img?.offsetTop + this.$refs.img?.clientHeight / 2;
     },
   },
 };

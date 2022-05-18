@@ -11,11 +11,11 @@
         <div class="p-always flex flex-col gap-9">
           <div
             v-for="item in items"
-            :key="item.title"
-            class="flex justify-between items-start work bg-white rounded shadow p-7 700:flex-col 700:gap-3 700:m-auto 700:items-center w-full"
+            :key="item.id"
+            class="flex justify-between items-start work bg-white rounded shadow p-7 700:flex-col 700:gap-3 700:m-auto 700:items-center 700:h-auto w-full h-60"
           >
             <article class="700:flex 700:flex-col 700:items-center">
-              <h3 class="text-5xl font-write 1000:text-4xl">
+              <h3 class="text-5xl font-write 1000:text-4xl 700:m-auto">
                 {{ item.attributes.name }}
               </h3>
               <p class="mb-4 mt-1 text-xl 1000:text-lg 700:mb-0">
@@ -29,9 +29,9 @@
               </nuxt-link>
             </article>
             <img
-              :src="`http://localhost:1337${item.attributes.image.data.attributes.url}`"
+              :src="`${$config.cmsUrl}${item.attributes.image.data.attributes.url}`"
               alt=""
-              class="max-h-44"
+              class="max-h-44 max-w mt-auto mb-auto"
             />
             <nuxt-link
               :to="`/my-work/${item.attributes.slug}`"
@@ -58,7 +58,7 @@ export default {
     };
   },
   async mounted() {
-    const data = await this.$axios.$get("http://localhost:1337/api/my-works", {
+    const data = await this.$axios.$get(`${this.$config.cmsUrl}/api/my-works`, {
       params: {
         populate: ["image"],
       },
@@ -77,5 +77,8 @@ export default {
 }
 .bg {
   background-color: white;
+}
+.max-w{
+  max-width: 16em;
 }
 </style>
