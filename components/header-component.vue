@@ -20,7 +20,7 @@
             alt="Ik"
             class="hidden 700:block m-auto img"
           />
-          <action title="Over mij →" class="1000:hidden" />
+          <action title="Over mij →" link="/about-me" class="1000:hidden" />
           <img src="/banner.png" alt="" class="hidden 1000:block dontShow" />
         </div>
       </div>
@@ -50,7 +50,7 @@ export default {
     window.addEventListener("scroll", this.onScroll);
     window.addEventListener("resize", this.resize);
     this.imgOffsetTop =
-      this.$refs.img.offsetTop + this.$refs.img.clientHeight / 2;
+      this.$refs.img?.offsetTop + this.$refs.img?.clientHeight / 2;
   },
 
   methods: {
@@ -65,7 +65,7 @@ export default {
     },
     resize() {
       this.imgOffsetTop =
-        this.$refs.img.offsetTop + this.$refs.img.clientHeight / 2;
+        this.$refs.img?.offsetTop + this.$refs.img?.clientHeight / 2;
     },
   },
 };

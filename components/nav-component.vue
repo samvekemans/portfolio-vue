@@ -39,20 +39,30 @@
             Home
           </nuxt-link>
         </li>
-        <li class="navElement">
+        <li @mouseenter="enter()" @mouseleave="leave()" class="navElement relative">
           <nuxt-link
+            ref="work"
             class="text-2xl px-1.5 py-1"
             :to="`/my-work`"
             :event="'/my-work' === $route.matched[0].path ? '' : 'click'"
           >
             Mijn Werk
           </nuxt-link>
+          <ul ref="ul" class="bg-pink absolute top-9 w-32 rounded notactive ulBorder"> 
+            <li v-for="workItem in workItems" :key="workItem.id" class="p-2 hover:bg-white border-2 border-pink rounded works">
+              <nuxt-link :to="`/my-work/${workItem.attributes.slug}`" class="h-full w-full rounded">{{ workItem.attributes.name }}</nuxt-link>
+            </li>
+          </ul>
         </li>
         <li class="navElement">
-          <nuxt-link class="text-2xl px-1.5 py-1" to="#"> Over mij </nuxt-link>
+          <nuxt-link class="text-2xl px-1.5 py-1" to="/about-me">
+            Over mij
+          </nuxt-link>
         </li>
         <li class="navElement">
-          <nuxt-link class="text-2xl px-1.5 py-1" to="#"> Contact </nuxt-link>
+          <nuxt-link class="text-2xl px-1.5 py-1" to="/contact">
+            Contact
+          </nuxt-link>
         </li>
       </ul>
     </nav>
@@ -61,6 +71,15 @@
 
 <script>
 export default {
+  data(){
+    return{
+      workItems: [],
+    }
+  },
+  async fetch() {
+    const data = await this.$axios.$get(`${this.$config.cmsUrl}/api/my-works`);
+    this.workItems = data.data;
+  },
   methods: {
     activateNav() {
       this.$refs.nav.classList.remove("nav-disabled");
@@ -70,8 +89,24 @@ export default {
       this.$refs.nav.classList.remove("nav-active");
       this.$refs.nav.classList.add("nav-disabled");
     },
+    enter(){
+      if(window.innerWidth >= 800){
+        this.$refs.ul.classList.remove('notactive')
+        this.$refs.ul.classList.add('active')
+        this.$refs.work.$el.style.borderBottom = 'none'
+      }
+    },
+    leave(){
+      if(window.innerWidth >= 800){
+        this.$refs.ul.classList.add('notactive')
+        this.$refs.ul.classList.remove('active')
+        if(this.$refs.work.$el.classList.contains('nuxt-link-active')){
+          this.$refs.work.$el.style.borderBottom = '2px solid #d97386'
+        }
+    }
   },
-};
+}
+}
 </script>
 
 <style>
@@ -122,5 +157,30 @@ svg.white {
     gap: 4em;
     background-color: #d97386;
   }
+}
+.active{
+  visibility: visible;
+  opacity: 1;
+}
+.notactive{
+  visibility: hidden;
+  opacity: 0;
+}
+.ulBorder{
+  transition: .4s;
+}
+.ulBorder::after {
+  content: "";
+  bottom: 100%;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  border-style: solid;
+  border-image: initial;
+  border-color:rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) #d97386 ;
+  border-width: 10px;
 }
 </style>

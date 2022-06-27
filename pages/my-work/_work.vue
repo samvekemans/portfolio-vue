@@ -3,17 +3,18 @@
     <header-component-work
       :title="title"
       scrollTo="#main"
-      :banner="`http://localhost:1337${banner}`"
+      :banner="`${$config.cmsUrl}${banner}`"
     />
 
     <main
       id="main"
       class="bg-no-repeat bg-center bg-cover bg-fixed relative"
-      :style="`background-image: url('http://localhost:1337${background}');`"
+      :style="`background-image: url('${$config.cmsUrl}${background}');`"
     >
       <div class="absolute h-24 bg-gradient-to-b from-white w-full"></div>
       <div class="max-w-6xl m-auto pb-16 pt-16">
         <div class="p-always">
+          <h1 class="font-write text-5xl text-center mb-10">{{ title }}</h1>
           <client-only>
             <carousel v-bind="options">
               <slide
@@ -23,7 +24,7 @@
               >
                 <div class="flex justify-center items-center">
                   <img
-                    :src="`http://localhost:1337${item.attributes.url}`"
+                    :src="`${$config.cmsUrl}${item.attributes.url}`"
                     alt=""
                     class="carouselImg max-h-carousel object-contain rounded shadow-lg"
                   />
@@ -61,7 +62,7 @@ export default {
     };
   },
   async fetch() {
-    const data = await this.$axios.$get("http://localhost:1337/api/my-works", {
+    const data = await this.$axios.$get(`${this.$config.cmsUrl}/api/my-works`, {
       params: {
         populate: ["banner", "image", "background", "carousel"],
         "filters[slug]": this.$route.params.work,
